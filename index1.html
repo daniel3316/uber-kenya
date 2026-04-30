@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMMANUEL Tours & Taxi For All | Mombasa</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C9A84C;--gold-light:#F0C84A;--gold-dark:#9B7B2E;
+  --black:#070707;--dark2:#161616;--dark3:#1E1E1E;--dark4:#252525;
+  --white:#FAFAFA;--muted:rgba(255,255,255,0.55);--border:rgba(201,168,76,0.18);
+  --font-display:'Playfair Display',serif;--font-body:'DM Sans',sans-serif;
+  --radius:12px;--transition:0.3s cubic-bezier(0.4,0,0.2,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--black);color:var(--white);overflow-x:hidden;line-height:1.6}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--black)}::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:10px}
+::selection{background:var(--gold);color:var(--black)}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15}
+
+/* NAVBAR */
+#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(7,7,7,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:padding var(--transition)}
+#navbar.scrolled{padding:12px 48px}
+.logo-wrap{display:flex;align-items:center;gap:12px}
+.logo-icon{width:48px;height:48px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:900;color:var(--black);font-size:18px;flex-shrink:0}
+.logo-text strong{display:block;font-family:var(--font-display);font-size:17px;color:var(--gold-light);font-weight:700;letter-spacing:1px}
+.logo-text span{font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.nav-menu{display:flex;align-items:center;gap:8px}
+nav{display:flex;align-items:center;gap:6px}
+nav a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:13px;font-weight:500;padding:8px 12px;border-radius:6px;transition:all var(--transition)}
+nav a:hover,nav a.active{color:var(--gold-light)}
+.nav-book-btn{background:var(--gold)!important;color:var(--black)!important;font-weight:700!important;border-radius:8px!important;margin-left:8px}
+.nav-book-btn:hover{background:var(--gold-light)!important;transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;z-index:1001;position:relative}
+.hamburger span{display:block;width:24px;height:2px;background:var(--gold);border-radius:2px;transition:all var(--transition)}
+
+/* HERO */
+#home{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;padding-top:80px}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(105deg,rgba(7,7,7,0.97) 0%,rgba(7,7,7,0.75) 55%,rgba(7,7,7,0.25) 100%),url('https://images.unsplash.com/photo-1509042582338-01f9a67a0d5c?w=1600&q=80') center/cover no-repeat;z-index:0}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.04) 1px,transparent 1px);background-size:60px 60px;z-index:1}
+.hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:80px 48px;display:grid;grid-template-columns:1fr 360px;gap:60px;align-items:center;width:100%}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);padding:7px 16px;border-radius:100px;font-size:12px;font-weight:600;color:var(--gold-light);letter-spacing:2px;text-transform:uppercase;margin-bottom:24px}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--gold-light);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.hero-title{font-size:clamp(36px,5vw,60px);font-weight:900;line-height:1.08;margin-bottom:20px}
+.gold{color:var(--gold-light)}.italic{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:16px;color:var(--muted);max-width:460px;margin-bottom:36px;line-height:1.75;font-weight:300}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:48px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--black);padding:14px 28px;border-radius:var(--radius);font-weight:700;font-size:15px;text-decoration:none;transition:all var(--transition);border:none;cursor:pointer;font-family:var(--font-body)}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 10px 30px rgba(201,168,76,.4)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--white);padding:14px 28px;border-radius:var(--radius);font-weight:600;font-size:15px;text-decoration:none;transition:all var(--transition);border:1.5px solid rgba(255,255,255,.25)}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold-light)}
+.hero-trust{display:flex;gap:24px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:10px}
+.trust-label{font-size:13px;color:var(--muted)}
+.trust-label strong{display:block;font-size:14px;color:var(--white);font-weight:600}
+.hero-contact-card{background:rgba(14,14,14,.92);border:1px solid var(--border);border-radius:20px;padding:32px;backdrop-filter:blur(20px)}
+.hero-contact-card h4{font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.contact-item{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06);text-decoration:none;color:var(--white);transition:color var(--transition)}
+.contact-item:last-child{border-bottom:none}
+.contact-item:hover{color:var(--gold-light)}
+.contact-icon{width:40px;height:40px;background:rgba(201,168,76,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.contact-details strong{display:block;font-size:15px;font-weight:600}
+.contact-details span{font-size:12px;color:var(--muted)}
+
+/* STATS */
+.stats-bar{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 48px}
+.stats-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.stat-item{text-align:center;padding:0 20px;border-right:1px solid var(--border)}
+.stat-item:last-child{border-right:none}
+.stat-num{font-family:var(--font-display);font-size:36px;font-weight:900;color:var(--gold-light);line-height:1;margin-bottom:4px}
+.stat-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px}
+
+/* QUICK BOOKING BAR */
+#booking-bar{background:var(--dark3);padding:40px 48px;border-bottom:1px solid var(--border)}
+.booking-wrap{max-width:1200px;margin:0 auto}
+.booking-title{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.booking-title h3{font-size:22px;font-family:var(--font-display)}
+.booking-title span{font-size:13px;color:var(--muted)}
+.booking-form{display:grid;grid-template-columns:1fr 1fr 160px 180px auto;gap:12px;align-items:end}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group label{font-size:11px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;font-weight:500}
+.form-control{background:var(--dark4);border:1.5px solid rgba(255,255,255,.08);border-radius:10px;padding:13px 16px;color:var(--white);font-family:var(--font-body);font-size:14px;outline:none;transition:border-color var(--transition);width:100%}
+.form-control:focus{border-color:var(--gold)}
+.form-control option{background:var(--dark3)}
+.form-control::placeholder{color:rgba(255,255,255,.3)}
+
+/* SECTIONS */
+section{padding:100px 48px}
+.section-inner{max-width:1200px;margin:0 auto}
+.section-label{font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:10px}
+.section-title{font-size:clamp(28px,3.5vw,44px);font-weight:900;margin-bottom:16px}
+.section-sub{color:var(--muted);font-size:16px;max-width:560px;font-weight:300;line-height:1.75}
+.section-header{margin-bottom:56px}
+.btn-sm{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1.5px solid var(--gold-dark);color:var(--gold-light);padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;cursor:pointer;font-family:var(--font-body);transition:all var(--transition);width:100%;justify-content:center}
+.btn-sm:hover{background:var(--gold);color:var(--black);border-color:var(--gold)}
+
+/* FLEET */
+#fleet{background:var(--black)}
+.fleet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.car-card{background:var(--dark2);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:all var(--transition);position:relative}
+.car-card:hover{transform:translateY(-6px);border-color:rgba(201,168,76,.45);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.car-badge{position:absolute;top:16px;left:16px;background:var(--gold);color:var(--black);font-size:11px;font-weight:700;padding:5px 12px;border-radius:100px;letter-spacing:1px;text-transform:uppercase;z-index:2}
+.car-badge.outline{background:var(--dark4);color:var(--gold-light);border:1px solid var(--gold-dark)}
+
+/* IMAGE PLACEHOLDER */
+.car-img-wrap{height:200px;overflow:hidden;position:relative;background:linear-gradient(135deg,#111,#1c1c1c);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border)}
+.car-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.car-card:hover .car-img-wrap img{transform:scale(1.05)}
+.img-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:100%;height:100%}
+.img-ph-icon{font-size:52px;opacity:.35}
+.img-ph-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,.45);font-weight:600;background:rgba(201,168,76,.06);border:1px dashed rgba(201,168,76,.25);padding:5px 14px;border-radius:100px}
+.img-ph-path{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-size:9px;color:rgba(255,255,255,.18);white-space:nowrap;font-family:monospace}
+
+.car-info{padding:22px 24px}
+.car-info h3{font-size:18px;margin-bottom:4px}
+.car-info p{color:var(--muted);font-size:13px;margin-bottom:14px;font-weight:300;line-height:1.6}
+.car-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.spec-item{background:var(--dark3);padding:10px 8px;border-radius:8px;text-align:center}
+.spec-icon{font-size:14px;margin-bottom:2px}
+.spec-val{font-size:12px;font-weight:700}
+.spec-name{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}
+.car-price-row{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(255,255,255,.06)}
+.car-price .from{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.car-price .amount{font-size:20px;font-family:var(--font-display);color:var(--gold-light);font-weight:900}
+.car-price .per{font-size:11px;color:var(--muted)}
+
+/* DESTINATIONS */
+#destinations{background:var(--dark2)}
+.routes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.route-card{background:var(--dark3);border:1px solid var(--border);border-radius:16px;padding:28px;transition:all var(--transition);position:relative;overflow:hidden}
+.route-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold-dark),var(--gold-light));opacity:0;transition:opacity var(--transition)}
+.route-card:hover{transform:translateY(-4px);border-color:rgba(201,168,76,.35)}
+.route-card:hover::before{opacity:1}
+.route-flag{font-size:28px;margin-bottom:14px}
+.route-from-to{font-family:var(--font-display);font-size:17px;font-weight:700;margin-bottom:6px;color:var(--gold-light)}
+.route-meta{font-size:12px;color:var(--muted);margin-bottom:20px}
+.price-rows{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.price-row{display:flex;justify-content:space-between;align-items:center;background:var(--dark4);padding:10px 14px;border-radius:8px}
+.price-row .car-type{font-size:13px;color:var(--muted)}
+.price-row .price-val{font-size:14px;font-weight:700;color:var(--gold)}
+
+/* BOOK */
+#book{background:var(--black);position:relative;overflow:hidden}
+#book::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(201,168,76,.06) 0%,transparent 70%);pointer-events:none}
+.book-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.book-form-card{background:var(--dark2);border:1px solid var(--border);border-radius:24px;padding:40px}
+.full-form{display:flex;flex-direction:column;gap:16px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+/* Payment tabs */
+.pay-tabs{display:flex;gap:8px;margin-bottom:14px}
+.pay-tab{flex:1;padding:10px;background:var(--dark4);border:1.5px solid rgba(255,255,255,.08);border-radius:10px;text-align:center;cursor:pointer;transition:all var(--transition);font-size:13px;font-weight:600;color:var(--muted);font-family:var(--font-body)}
+.pay-tab:hover{border-color:var(--gold-dark);color:var(--white)}
+.pay-tab.active{border-color:var(--gold);background:rgba(201,168,76,.1);color:var(--gold-light)}
+.pay-panel{display:none}
+.pay-panel.active{display:block}
+.mpesa-panel{background:rgba(0,166,81,.08);border:1px solid rgba(0,166,81,.2);border-radius:12px;padding:20px}
+.mpesa-logo{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.mpesa-logo strong{font-size:22px;color:#00A651;font-family:var(--font-display)}
+.mpesa-logo small{font-size:12px;color:var(--muted)}
+.mpesa-steps{font-size:13px;color:var(--muted);line-height:2}
+.mpesa-steps b{color:var(--white)}
+.info-box{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:12px;color:var(--muted)}
+.info-box.green{background:rgba(0,166,81,.08)}
+.info-box.blue{background:rgba(59,130,246,.08)}
+.info-box b{color:var(--white)}
+.card-panel{background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.18);border-radius:12px;padding:20px}
+.card-logos{display:flex;gap:8px;margin-bottom:12px;align-items:center}
+.clg{background:white;border-radius:6px;padding:4px 10px;font-size:12px;font-weight:900}
+.clg.visa{color:#1A1F71}.clg.mc{color:#EB001B}
+.reserve-panel{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.18);border-radius:12px;padding:20px}
+.reserve-panel p{font-size:14px;color:var(--muted);line-height:1.7}
+.fare-estimate{background:var(--dark4);border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;justify-content:space-between;align-items:center}
+.fare-estimate .lbl{font-size:12px;color:var(--muted)}
+.fare-estimate .amt{font-size:22px;font-family:var(--font-display);color:var(--gold-light);font-weight:900}
+
+/* DRIVERS */
+#drivers{background:var(--dark2)}
+.drivers-grid-section{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.driver-card{background:var(--dark3);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:all var(--transition)}
+.driver-card:hover{transform:translateY(-5px);border-color:rgba(201,168,76,.4);box-shadow:0 16px 50px rgba(0,0,0,.4)}
+
+/* DRIVER IMAGE PLACEHOLDER */
+.drv-img-wrap{height:220px;position:relative;background:linear-gradient(135deg,#111,#1c1c1c);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border)}
+.drv-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:top}
+.drv-ph{display:flex;flex-direction:column;align-items:center;gap:10px}
+.drv-ph-circle{width:90px;height:90px;border-radius:50%;background:rgba(201,168,76,.1);border:2px dashed rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;font-size:44px}
+.drv-ph-label{font-size:10px;color:rgba(201,168,76,.4);letter-spacing:2px;text-transform:uppercase;font-weight:600}
+.drv-verified{position:absolute;top:12px;right:12px;background:rgba(0,166,81,.9);color:white;font-size:10px;font-weight:700;padding:4px 10px;border-radius:100px;letter-spacing:1px}
+.drv-body{padding:20px 22px}
+.drv-name{font-size:18px;font-family:var(--font-display);font-weight:700;margin-bottom:2px}
+.drv-role{font-size:11px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;font-weight:600;margin-bottom:10px}
+.drv-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:12px;font-weight:300}
+.drv-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.drv-tag{background:var(--dark4);font-size:11px;padding:4px 10px;border-radius:100px;color:rgba(255,255,255,.6)}
+
+/* STAR RATING */
+.star-rating-wrap{padding-top:14px;border-top:1px solid rgba(255,255,255,.06)}
+.stars-display-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.stars-display,.stars-user{display:flex;gap:3px}
+.star{font-size:18px;cursor:pointer;transition:transform .15s ease;color:rgba(255,255,255,.15)}
+.star:hover,.star.lit{color:var(--gold-light);transform:scale(1.2)}
+.star.display-star{cursor:default;font-size:16px}
+.star.display-star.lit{color:var(--gold)}
+.rating-avg{font-size:14px;font-weight:700;color:var(--gold)}
+.rating-cnt{font-size:12px;color:var(--muted)}
+.user-rating-lbl{font-size:11px;color:var(--muted);margin-bottom:5px}
+
+/* WHY / HOW */
+.why-list{display:flex;flex-direction:column;gap:16px;margin-top:28px}
+.why-item{display:flex;gap:16px;align-items:flex-start}
+.why-icon{width:44px;height:44px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.why-text h4{font-size:15px;font-weight:600;margin-bottom:3px}
+.why-text p{font-size:13px;color:var(--muted);font-weight:300;line-height:1.6}
+.how-steps{display:grid;grid-template-columns:repeat(4,1fr);background:var(--dark3);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-top:28px}
+.step{padding:20px 14px;text-align:center;border-right:1px solid var(--border)}
+.step:last-child{border-right:none}
+.step-num{width:30px;height:30px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:var(--black);margin:0 auto 8px}
+.step-icon{font-size:20px;margin-bottom:6px}
+.step-title{font-size:12px;font-weight:600;margin-bottom:3px}
+.step-desc{font-size:11px;color:var(--muted);line-height:1.5}
+
+/* ABOUT */
+#about{background:var(--black)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-img-box{width:100%;height:400px;background:linear-gradient(135deg,var(--dark3),var(--dark4));border-radius:20px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:90px;position:relative;overflow:hidden}
+.about-img-box::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.05),transparent 60%)}
+.about-float{position:absolute;bottom:-18px;right:-18px;background:var(--gold);color:var(--black);border-radius:16px;padding:18px 22px;text-align:center;box-shadow:0 10px 40px rgba(201,168,76,.3)}
+.about-float strong{display:block;font-size:28px;font-family:var(--font-display);font-weight:900;line-height:1}
+.about-float span{font-size:11px;font-weight:600;letter-spacing:1px}
+.about-story{font-size:15px;color:rgba(255,255,255,.7);line-height:1.85;font-weight:300;margin-bottom:22px}
+.values-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:28px}
+.value-item{background:var(--dark3);border-left:3px solid var(--gold);padding:15px;border-radius:0 10px 10px 0}
+.value-item h5{font-size:14px;font-weight:600;margin-bottom:3px}
+.value-item p{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* CONTACT */
+#contact{background:var(--dark2)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+.contact-cards{display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
+.cc-item{display:flex;align-items:center;gap:18px;background:var(--dark3);border:1px solid var(--border);border-radius:16px;padding:18px 22px;text-decoration:none;color:var(--white);transition:all var(--transition)}
+.cc-item:hover{border-color:rgba(201,168,76,.45);transform:translateX(6px)}
+.cc-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.cc-icon.green{background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.2)}
+.cc-icon.blue{background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.2)}
+.cc-icon.gold{background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.2)}
+.cc-text strong{display:block;font-size:15px;font-weight:600}
+.cc-text span{font-size:13px;color:var(--muted)}
+.social-pay-box{background:var(--dark3);border:1px solid var(--border);border-radius:16px;padding:22px}
+.social-pay-box h5{font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;font-weight:600}
+.social-icons{display:flex;gap:10px;margin-bottom:18px}
+.social-btn{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;text-decoration:none;background:var(--dark4);border:1px solid rgba(255,255,255,.08);transition:all var(--transition)}
+.social-btn:hover{transform:translateY(-3px);border-color:rgba(201,168,76,.4)}
+.pay-logos{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.pay-logo{background:var(--dark4);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:7px 12px;font-size:12px;font-weight:800}
+.pay-logo.mpesa{color:#00A651}.pay-logo.visa{color:#1A1F71;background:white}.pay-logo.mc{color:#EB001B}
+.contact-form-card{background:var(--dark3);border:1px solid var(--border);border-radius:24px;padding:36px}
+.contact-form{display:flex;flex-direction:column;gap:14px}
+.message-area{background:var(--dark4);border:1.5px solid rgba(255,255,255,.08);border-radius:10px;padding:13px 16px;color:var(--white);font-family:var(--font-body);font-size:14px;outline:none;transition:border-color var(--transition);width:100%;resize:vertical;min-height:110px}
+.message-area:focus{border-color:var(--gold)}
+.message-area::placeholder{color:rgba(255,255,255,.3)}
+
+/* FOOTER */
+footer{background:var(--dark2);border-top:1px solid var(--border);padding:60px 48px 0}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid var(--border)}
+.footer-brand p{font-size:14px;color:var(--muted);margin:14px 0 20px;font-weight:300;line-height:1.75;max-width:280px}
+.footer-col h5{font-size:11px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+.footer-col a{display:block;color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;transition:color var(--transition);font-weight:300}
+.footer-col a:hover{color:var(--gold-light)}
+.footer-bottom{max-width:1200px;margin:0 auto;padding:18px 0;display:flex;align-items:center;justify-content:space-between}
+.footer-bottom p{font-size:12px;color:rgba(255,255,255,.3)}
+
+/* FLOAT + MODAL + TOAST */
+.wa-float{position:fixed;bottom:28px;right:28px;width:60px;height:60px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;text-decoration:none;box-shadow:0 6px 24px rgba(37,211,102,.4);z-index:999;animation:waBounce 3s ease-in-out infinite}
+.wa-float:hover{transform:scale(1.1)}
+@keyframes waBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(6px);z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{background:var(--dark2);border:1px solid var(--border);border-radius:24px;padding:40px;max-width:440px;width:90%;text-align:center;transform:scale(.9);transition:transform .3s ease}
+.modal-overlay.open .modal-box{transform:scale(1)}
+.modal-icon{font-size:52px;margin-bottom:14px}
+.modal-box h3{font-size:22px;margin-bottom:10px}
+.modal-box p{color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:22px}
+.modal-close{background:var(--dark4);border:none;color:var(--white);padding:12px 24px;border-radius:10px;cursor:pointer;font-family:var(--font-body);font-size:14px;font-weight:600;transition:all var(--transition)}
+.modal-close:hover{background:var(--dark3)}
+#toast{position:fixed;bottom:100px;right:28px;background:var(--dark2);border:1px solid var(--gold);color:var(--white);padding:14px 22px;border-radius:12px;font-size:14px;z-index:3000;transform:translateX(200%);transition:transform .4s cubic-bezier(.4,0,.2,1);max-width:300px;box-shadow:0 8px 30px rgba(0,0,0,.5)}
+#toast.show{transform:translateX(0)}
+#toast.error{border-color:#e74c3c}
+#toast.success{border-color:#2ecc71}
+.btn-loading{opacity:.7;pointer-events:none}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--black);border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .fleet-grid,.drivers-grid-section{grid-template-columns:repeat(2,1fr)}
+  .booking-form{grid-template-columns:1fr 1fr 1fr}
+  .routes-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:32px}
+}
+@media(max-width:768px){
+  #navbar{padding:14px 20px}
+  .nav-menu{display:none;position:fixed;inset:0;background:rgba(7,7,7,.98);flex-direction:column;justify-content:center;align-items:center;gap:16px;z-index:999}
+  .nav-menu.open{display:flex}
+  nav{flex-direction:column;gap:4px}
+  nav a{font-size:20px;padding:10px 32px}
+  .hamburger{display:flex}
+  .hero-content{grid-template-columns:1fr;padding:40px 20px;gap:32px}
+  .hero-contact-card{display:none}
+  section{padding:60px 20px}
+  #booking-bar{padding:28px 20px}
+  .stats-bar{padding:20px}
+  .stats-inner{grid-template-columns:repeat(2,1fr);gap:16px}
+  .stat-item{border-right:none;padding:12px}
+  .stat-item:nth-child(odd){border-right:1px solid var(--border)}
+  .booking-form{grid-template-columns:1fr}
+  .fleet-grid,.routes-grid,.drivers-grid-section{grid-template-columns:1fr}
+  .book-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr}
+  .how-steps{grid-template-columns:repeat(2,1fr)}
+  .form-row{grid-template-columns:1fr}
+  .values-grid{grid-template-columns:1fr}
+  footer{padding:40px 20px 0}
+  .footer-bottom{flex-direction:column;gap:8px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<header id="navbar">
+  <div class="logo-wrap">
+    <div class="logo-icon">ET</div>
+    <div class="logo-text"><strong>EMMANUEL</strong><span>Tours &amp; Taxi For All</span></div>
+  </div>
+  <div class="nav-menu" id="navMenu">
+    <nav>
+      <a href="#home" class="active" onclick="closeNav()">Home</a>
+      <a href="#fleet" onclick="closeNav()">Fleet</a>
+      <!--<a href="#destinations" onclick="closeNav()">Destinations</a>-->
+      <a href="#book" onclick="closeNav()">Book</a>
+      <!--<a href="#drivers" onclick="closeNav()">Drivers</a>-->
+      <a href="#about" onclick="closeNav()">About</a>
+      <a href="#contact" onclick="closeNav()">Contact</a>
+    </nav>
+    <a href="#book" class="btn-primary nav-book-btn" onclick="closeNav()">Book Now</a>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+</header>
+
+<!-- ══ HERO ══ -->
+<section id="home">
+  <div class="hero-bg"></div><div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="fade-in">
+      <div class="hero-badge">Premium Transport Services</div>
+      <h1 class="hero-title">Reliable &amp; Comfortable<br><span class="gold">Rides in Mombasa</span><br><em class="italic">and Beyond</em></h1>
+      <p class="hero-sub">Safe, affordable and professional transport for individuals, families, groups and corporate clients across Mombasa and beyond.</p>
+      <div class="hero-ctas">
+        <a href="#book" class="btn-primary">📅 Book Now</a>
+        <a href="https://wa.me/254720000104" class="btn-secondary" target="_blank">💬 WhatsApp Us</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item"><span style="font-size:20px">🛡️</span><div class="trust-label"><strong>Safe &amp; Reliable</strong>Your safety, our priority</div></div>
+        <div class="trust-item"><span style="font-size:20px">⏱️</span><div class="trust-label"><strong>On-Time Guarantee</strong>Punctual and dependable</div></div>
+        <div class="trust-item"><span style="font-size:20px">✨</span><div class="trust-label"><strong>Clean &amp; Comfortable</strong>Well maintained vehicles</div></div>
+      </div>
+    </div>
+    <div class="hero-contact-card fade-in">
+      <h4>Contact Us</h4>
+      <a href="https://wa.me/254720000104" class="contact-item" target="_blank"><div class="contact-icon">💬</div><div class="contact-details"><strong>+254 720 000 104</strong><span>WhatsApp / Primary</span></div></a>
+      <a href="tel:+254717280247" class="contact-item"><div class="contact-icon">📞</div><div class="contact-details"><strong>+254 717 280 247</strong><span>Secondary Line</span></div></a>
+      <a href="mailto:emmanueltours@gmail.com" class="contact-item"><div class="contact-icon">✉️</div><div class="contact-details"><strong>emmanueltours@gmail.com</strong><span>Email Us</span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STATS ══ -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="stat-num">3+</div><div class="stat-label">Professional Drivers</div></div>
+    <div class="stat-item"><div class="stat-num">3+</div><div class="stat-label">Well Maintained Cars</div></div>
+    <div class="stat-item"><div class="stat-num">500+</div><div class="stat-label">Happy Customers</div></div>
+    <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Safety &amp; Reliability</div></div>
+  </div>
+</div>
+
+<!-- ══ QUICK BOOKING BAR ══ -->
+<div id="booking-bar">
+  <div class="booking-wrap">
+    <div class="booking-title"><h3>Quick Booking</h3><span>Get an instant price and book your ride</span></div>
+    <div class="booking-form">
+      <div class="form-group"><label>Pickup Location</label><input type="text" class="form-control" id="qPickup" placeholder="Enter pickup location"></div>
+      <div class="form-group"><label>Destination</label><input type="text" class="form-control" id="qDestination" placeholder="Enter destination"></div>
+      <div class="form-group"><label>Date</label><input type="date" class="form-control" id="qDate"></div>
+      <div class="form-group"><label>Car Type</label><select class="form-control" id="qCar"><option value="">Select car</option><option value="vitz">Vitz (4 Seater)</option><option value="porte">Porte (4 Seater)</option><option value="sienta">Sienta (6 Seater)</option></select></div>
+      <button class="btn-primary" onclick="quickCheck()" style="white-space:nowrap;height:48px;margin-top:22px;">🔍 Check</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FLEET ══ -->
+<section id="fleet">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="section-label">Our Fleet</div>
+      <h2 class="section-title">Choose Your Perfect Ride</h2>
+      <p class="section-sub">Three well-maintained vehicles ready to serve you.</p>
+    </div>
+    <div class="fleet-grid">
+
+      <!-- CAR 1 -->
+      <div class="car-card fade-in">
+        <div class="car-badge">Most Popular</div>
+        <div class="car-img-wrap">
+          <img src="vitz.jpeg" alt="Toyota Vitz White" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-ph" style="display:none"><div class="img-ph-icon">🚗</div><div class="img-ph-label">📷 Add Car 1 Photo</div><div class="img-ph-path">images/car1-vitz-white.jpg</div></div>
+        </div>
+        <div class="car-info">
+          <h3>Toyota Vitz <span style="color:var(--gold);font-size:13px;">(White)</span></h3>
+          <p>Perfect for solo travelers and couples. Fuel-efficient, air-conditioned and reliable for all trips.</p>
+          <div class="car-specs"><div class="spec-item"><div class="spec-icon">👤</div><div class="spec-val">4</div><div class="spec-name">Seats</div></div><div class="spec-item"><div class="spec-icon">🧳</div><div class="spec-val">2</div><div class="spec-name">Bags</div></div><div class="spec-item"><div class="spec-icon">❄️</div><div class="spec-val">A/C</div><div class="spec-name">Comfort</div></div></div>
+          <div class="car-price-row"><div class="car-price"><div class="from">Starting from</div><div class="amount">KES 2,500<span class="per">/trip</span></div></div><a href="#book" class="btn-sm" style="width:auto">Book →</a></div>
+        </div>
+      </div>
+
+      <!-- CAR 2 -->
+      <div class="car-card fade-in">
+        <div class="car-badge outline">Family Choice</div>
+        <div class="car-img-wrap">
+          <img src="sienta.jpeg" alt="Toyota Sienta" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-ph" style="display:none"><div class="img-ph-icon">🚐</div><div class="img-ph-label">📷 Add Car 2 Photo</div><div class="img-ph-path">images/car2-sienta.jpg</div></div>
+        </div>
+        <div class="car-info">
+          <h3>Toyota Sienta <span style="color:var(--gold);font-size:13px;">(6 Seater)</span></h3>
+          <p>Ideal for families and groups. Spacious with extra luggage capacity for comfortable long journeys.</p>
+          <div class="car-specs"><div class="spec-item"><div class="spec-icon">👤</div><div class="spec-val">6</div><div class="spec-name">Seats</div></div><div class="spec-item"><div class="spec-icon">🧳</div><div class="spec-val">4</div><div class="spec-name">Bags</div></div><div class="spec-item"><div class="spec-icon">❄️</div><div class="spec-val">A/C</div><div class="spec-name">Comfort</div></div></div>
+          <div class="car-price-row"><div class="car-price"><div class="from">Starting from</div><div class="amount">KES 3,800<span class="per">/trip</span></div></div><a href="#book" class="btn-sm" style="width:auto">Book →</a></div>
+        </div>
+      </div>
+
+      <!-- CAR 3 -->
+      <div class="car-card fade-in">
+        <div class="car-badge">Most Popular</div>
+        <div class="car-img-wrap">
+          <img src="porte.jpeg" alt="Toyota Porte White" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-ph" style="display:none"><div class="img-ph-icon">🚗</div><div class="img-ph-label">📷 Add Car 1 Photo</div><div class="img-ph-path">images/car1-vitz-white.jpg</div></div>
+        </div>
+        <div class="car-info">
+          <h3>Toyota Porte <span style="color:var(--gold);font-size:13px;">(White)</span></h3>
+          <p>Perfect for solo travelers and couples. Fuel-efficient, air-conditioned and reliable for all trips.</p>
+          <div class="car-specs"><div class="spec-item"><div class="spec-icon">👤</div><div class="spec-val">4</div><div class="spec-name">Seats</div></div><div class="spec-item"><div class="spec-icon">🧳</div><div class="spec-val">2</div><div class="spec-name">Bags</div></div><div class="spec-item"><div class="spec-icon">❄️</div><div class="spec-val">A/C</div><div class="spec-name">Comfort</div></div></div>
+          <div class="car-price-row"><div class="car-price"><div class="from">Starting from</div><div class="amount">KES 2,500<span class="per">/trip</span></div></div><a href="#book" class="btn-sm" style="width:auto">Book →</a></div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
+<!--══ DESTINATIONS ══
+<section id="destinations">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="section-label">Destinations &amp; Pricing</div>
+      <h2 class="section-title">Where Would You Like to Go?</h2>
+      <p class="section-sub">Transparent pricing across all major routes. No hidden charges — what you see is what you pay.</p>
+    </div>
+    <div class="routes-grid">
+      <div class="route-card fade-in"><div class="route-flag">🏖️</div><div class="route-from-to">Mombasa → Diani Beach</div><div class="route-meta">📏 ~35km &nbsp;|&nbsp; ⏱️ ~1 hour</div><div class="price-rows"><div class="price-row"><span class="car-type">🚗 Vitz</span><span class="price-val">KES 2,500 – 3,000</span></div><div class="price-rows"><div class="price-row"><span class="car-type">🚗 Porte</span><span class="price-val">KES 2,500 – 3,000</span></div><div class="price-row"><span class="car-type">🚐 Sienta</span><span class="price-val">KES 3,500 – 4,500</span></div></div><a href="#book" class="btn-sm">Book This Trip</a></div>
+      <div class="route-card fade-in"><div class="route-flag">🐠</div><div class="route-from-to">Mombasa → Watamu</div><div class="route-meta">📏 ~110km &nbsp;|&nbsp; ⏱️ ~2.5 hours</div><div class="price-rows"><div class="price-row"><span class="car-type">🚗 Vitz</span><span class="price-val">KES 2,500 – 3,000</span></div><div class="price-rows"><div class="price-row"><span class="car-type">🚗 Vitz</span><span class="price-val">KES 6,000 – 7,500</span></div><div class="price-row"><span class="car-type">🚐 Sienta</span><span class="price-val">KES 8,000 – 10,000</span></div></div><a href="#book" class="btn-sm">Book This Trip</a></div>
+      <div class="route-card fade-in"><div class="route-flag">🦁</div><div class="route-from-to">Mombasa → Malindi</div><div class="route-meta">📏 ~120km &nbsp;|&nbsp; ⏱️ ~2 hours</div><div class="price-rows"><div class="price-row"><span class="car-type">🚗 Vitz</span><span class="price-val">KES 2,500 – 3,000</span></div><div class="price-rows"><div class="price-row"><span class="car-type">🚗 Vitz</span><span class="price-val">KES 7,000 – 8,500</span></div><div class="price-row"><span class="car-type">🚐 Sienta</span><span class="price-val">KES 9,000 – 11,000</span></div></div><a href="#book" class="btn-sm">Book This Trip</a></div>
+      <div class="route-card fade-in"><div class="route-flag">✈️</div><div class="route-from-to">Airport Transfers</div><div class="route-meta">📍 Moi International Airport</div><div class="price-rows"><div class="price-row"><span class="car-type">🚗 Vitz</span><span class="price-val">From KES 1,500</span></div><div class="price-row"><span class="car-type">🚐 Sienta</span><span class="price-val">From KES 2,000</span></div></div><a href="#book" class="btn-sm">Book Transfer</a></div>
+      <div class="route-card fade-in"><div class="route-flag">🌆</div><div class="route-from-to">Within Mombasa</div><div class="route-meta">📍 Town, Nyali, Likoni, Bamburi &amp; more</div><div class="price-rows"><div class="price-row"><span class="car-type">🚗 Vitz</span><span class="price-val">From KES 500</span></div><div class="price-row"><span class="car-type">🚐 Sienta</span><span class="price-val">From KES 800</span></div></div><a href="#book" class="btn-sm">Book Local Ride</a></div>
+      <div class="route-card fade-in"><div class="route-flag">🗺️</div><div class="route-from-to">Custom Route</div><div class="route-meta">📞 Negotiate your own price</div><div class="price-rows"><div class="price-row" style="background:rgba(201,168,76,.08)"><span class="car-type" style="color:var(--gold)">Long distance &amp; special trips</span><span class="price-val">Negotiable</span></div></div><a href="https://wa.me/254720000104?text=I need a custom route quote" class="btn-sm" target="_blank">WhatsApp to Negotiate</a></div>
+    </div>
+  </div>
+</section>-->
+
+<!-- ══ BOOKING SECTION ══ -->
+<section id="book">
+  <div class="section-inner">
+    <div class="book-grid">
+      <div>
+        <div class="section-header fade-in">
+          <div class="section-label">Book a Ride</div>
+          <h2 class="section-title">Reserve Your Trip Today</h2>
+          <p class="section-sub">Fill in your details and choose how you'd like to pay. We'll confirm your booking immediately.</p>
+        </div>
+        <div class="book-form-card fade-in">
+          <div class="full-form">
+            <div class="form-row">
+              <div class="form-group"><label>Full Name</label><input type="text" class="form-control" id="name" placeholder="Your full name"></div>
+              <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" class="form-control" id="phone" placeholder="e.g. 0720000104"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Pickup Location</label><input type="text" class="form-control" id="pickup" placeholder="Enter pickup location"></div>
+              <div class="form-group"><label>Destination</label><input type="text" class="form-control" id="destination" placeholder="Enter destination"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Travel Date</label><input type="date" class="form-control" id="date"></div>
+              <div class="form-group"><label>Pickup Time</label><input type="time" class="form-control" id="time"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Select Car</label><select class="form-control" id="car" onchange="updateFare()"><option value="">-- Choose vehicle --</option><option value="vitz">Vitz (4 Seater) — from KES 2,500</option><option value="porte">Porte (4 Seater) — from KES 2,500</option><option value="sienta">Sienta (6 Seater) — from KES 3,800</option></select></div>
+              <div class="form-group"><label>Passengers</label><select class="form-control" id="passengers"><option value="">Select</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div>
+            </div>
+
+            <!-- FARE ESTIMATE -->
+            <div class="fare-estimate"><div><div class="lbl">Estimated Fare</div><div class="amt" id="fareDisplay">Select car to see estimate</div></div><div style="font-size:12px;color:var(--muted);text-align:right">Final price<br>confirmed on booking</div></div>
+
+            <!-- PAYMENT TABS -->
+            <div class="form-group">
+              <label>Payment Method</label>
+              <div class="pay-tabs">
+                <div class="pay-tab active" onclick="switchTab('mpesa',this)">📱 M-Pesa</div>
+                <!--<div class="pay-tab" onclick="switchTab('card',this)">💳 Card / Visa</div>-->
+                <div class="pay-tab" onclick="switchTab('reserve',this)">📋 Reserve Only</div>
+              </div>
+              <input type="hidden" id="payment" value="mpesa">
+
+              <!-- M-PESA -->
+              <div class="pay-panel active" id="panel-mpesa">
+                <div class="mpesa-panel">
+                  <div class="mpesa-logo"><strong>M-PESA</strong><small>Powered by Safaricom Daraja API</small></div>
+                  <div class="mpesa-steps">1. Confirm your M-Pesa phone number above<br>2. Click <b>Confirm Booking</b><br>3. You'll receive an <b>STK Push</b> on your phone<br>4. Enter your <b>M-Pesa PIN</b> to complete payment<br>5. Booking confirmed — we'll call to verify!</div>
+                  <!--<div class="info-box green">💡 <b>To go live:</b> Replace sandbox credentials in your Apps Script with your real Safaricom Daraja <b>Live API keys</b> and switch the URL to <code>api.safaricom.co.ke</code>. Payments will reflect directly in your M-Pesa account.</div>-->
+                </div>
+              </div>
+
+              <!-- CARD -->
+              <!--<div class="pay-panel" id="panel-card">
+                <div class="card-panel">
+                  <div class="card-logos"><div class="clg visa">VISA</div><div class="clg mc">Mastercard</div><span style="font-size:20px">💳</span></div>
+                  <p style="font-size:13px;color:var(--muted);margin-bottom:10px">Powered by <strong style="color:var(--gold)">Pesapal</strong> — Kenya's trusted payment gateway. Supports Visa, Mastercard &amp; local bank cards. Payments go directly to your bank account.</p>
+                  <div class="info-box blue">💡 <b>Setup:</b> Register at <b style="color:var(--gold)">pesapal.com</b> → get Consumer Key &amp; Secret → add to Apps Script → card payments will reflect in your bank account automatically.</div>
+                </div>
+              </div>
+
+              <!-- RESERVE -->
+              <div class="pay-panel" id="panel-reserve">
+                <div class="reserve-panel"><p><strong>Reserve now, pay on the day.</strong><br>Your booking is sent to Emmanuel via WhatsApp for confirmation. Pay in cash or M-Pesa directly to your driver. No upfront payment needed.</p></div>
+              </div>
+            </div>
+
+            <div class="form-group"><label>Special Requests (Optional)</label><textarea class="message-area" id="notes" placeholder="Extra stops, luggage, child seat, etc..." style="min-height:70px"></textarea></div>
+            <button class="btn-primary" id="submitBtn" onclick="bookRide()" style="width:100%;justify-content:center;padding:16px;font-size:16px">📅 Confirm Booking</button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-header fade-in"><div class="section-label">Why Choose Us</div><h2 class="section-title">Your Comfort is Our Priority</h2></div>
+        <div class="why-list fade-in">
+          <div class="why-item"><div class="why-icon">💰</div><div class="why-text"><h4>Affordable &amp; Transparent</h4><p>Clear rates for every route, negotiable for long trips. No hidden charges.</p></div></div>
+          <div class="why-item"><div class="why-icon">🗺️</div><div class="why-text"><h4>Deep Local Knowledge</h4><p>Our drivers know every corner of Mombasa — fastest routes, no wasted time.</p></div></div>
+          <div class="why-item"><div class="why-icon">📞</div><div class="why-text"><h4>24/7 Support</h4><p>Reach us anytime by call or WhatsApp. We respond within minutes.</p></div></div>
+          <div class="why-item"><div class="why-icon">✈️</div><div class="why-text"><h4>Airport &amp; Long Distance</h4><p>Reliable airport transfers and long-distance trips anywhere in Kenya.</p></div></div>
+          <div class="why-item"><div class="why-icon">🚗</div><div class="why-text"><h4>Clean, Comfortable Cars</h4><p>All vehicles well-maintained, air-conditioned and inspected regularly.</p></div></div>
+        </div>
+        <div class="how-steps fade-in">
+          <div class="step"><div class="step-icon">🚗</div><div class="step-num">1</div><div class="step-title">Choose Car</div><div class="step-desc">Pick the vehicle that suits you</div></div>
+          <div class="step"><div class="step-icon">📍</div><div class="step-num">2</div><div class="step-title">Pick Location</div><div class="step-desc">Enter pickup &amp; destination</div></div>
+          <div class="step"><div class="step-icon">📅</div><div class="step-num">3</div><div class="step-title">Date &amp; Time</div><div class="step-desc">Choose your travel time</div></div>
+          <div class="step"><div class="step-icon">💳</div><div class="step-num">4</div><div class="step-title">Pay &amp; Go</div><div class="step-desc">Pay securely or reserve now</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DRIVERS ══ -->
+<!--<section id="drivers">
+  <div class="section-inner">
+    <div class="section-header fade-in" style="text-align:center;max-width:600px;margin:0 auto 56px">
+      <div class="section-label">Meet Our Team</div>
+      <h2 class="section-title">Professional Drivers You Can Trust</h2>
+      <p class="section-sub" style="max-width:100%">All drivers are vetted, experienced and committed to your safety and comfort on every journey.</p>
+    </div>
+    <div class="drivers-grid-section">
+
+      <!-- DRIVER 1 — EMMANUEL -->
+      <!--<div class="driver-card fade-in">
+        <div class="drv-img-wrap">
+          <img src="images/driver1-emmanuel.jpg" alt="Emmanuel" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="drv-ph" style="display:none"><div class="drv-ph-circle">👨‍✈️</div><div class="drv-ph-label">📷 driver1-emmanuel.jpg</div></div>
+          <div class="drv-verified">✓ Verified</div>
+        </div>
+        <div class="drv-body">
+          <div class="drv-name">Emmanuel</div>
+          <div class="drv-role">🌟 Owner &amp; Lead Driver</div>
+          <p class="drv-desc">Emmanuel founded this business with a mission to provide the most reliable and comfortable transport in Mombasa. With 5+ years behind the wheel, deep knowledge of all coastal routes and a passion for excellent service, he personally ensures every ride meets the highest standard.</p>
+          <div class="drv-tags"><span class="drv-tag">5+ Years</span><span class="drv-tag">All Routes</span><span class="drv-tag">English / Swahili</span><span class="drv-tag">Airport Expert</span></div>
+          <div class="star-rating-wrap" data-driver="1" data-avg="4.9" data-count="128">
+            <div class="stars-display-row"><div class="stars-display" id="disp-1"></div><span class="rating-avg" id="avg-1">4.9</span><span class="rating-cnt" id="cnt-1">(128 ratings)</span></div>
+            <div class="user-rating-lbl">Rate this driver:</div>
+            <div class="stars-user" id="user-1"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DRIVER 2 -->
+      <!--<div class="driver-card fade-in">
+        <div class="drv-img-wrap">
+          <img src="images/driver2.jpg" alt="Driver 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="drv-ph" style="display:none"><div class="drv-ph-circle">👨‍✈️</div><div class="drv-ph-label">📷 driver2.jpg</div></div>
+          <div class="drv-verified">✓ Verified</div>
+        </div>
+        <div class="drv-body">
+          <div class="drv-name">Driver 2 — Add Name</div>
+          <div class="drv-role">🚗 Professional Driver</div>
+          <p class="drv-desc" style="color:rgba(201,168,76,.55);font-style:italic">📝 Replace with Driver 2's real name and a short bio — years of experience, routes they specialize in, and a personal note.</p>
+          <div class="drv-tags"><span class="drv-tag">Add years</span><span class="drv-tag">Add specialty</span><span class="drv-tag">Add language</span></div>
+          <div class="star-rating-wrap" data-driver="2" data-avg="0" data-count="0">
+            <div class="stars-display-row"><div class="stars-display" id="disp-2"></div><span class="rating-avg" id="avg-2">—</span><span class="rating-cnt" id="cnt-2">(No ratings yet)</span></div>
+            <div class="user-rating-lbl">Rate this driver:</div>
+            <div class="stars-user" id="user-2"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DRIVER 3 -->
+      <!--<div class="driver-card fade-in">
+        <div class="drv-img-wrap">
+          <img src="images/driver3.jpg" alt="Driver 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="drv-ph" style="display:none"><div class="drv-ph-circle">👨‍✈️</div><div class="drv-ph-label">📷 driver3.jpg</div></div>
+          <div class="drv-verified">✓ Verified</div>
+        </div>
+        <div class="drv-body">
+          <div class="drv-name">Driver 3 — Add Name</div>
+          <div class="drv-role">🚗 Professional Driver</div>
+          <p class="drv-desc" style="color:rgba(201,168,76,.55);font-style:italic">📝 Replace with Driver 3's real name and a short bio — years of experience, routes they specialize in, and a personal note.</p>
+          <div class="drv-tags"><span class="drv-tag">Add years</span><span class="drv-tag">Add specialty</span><span class="drv-tag">Add language</span></div>
+          <div class="star-rating-wrap" data-driver="3" data-avg="0" data-count="0">
+            <div class="stars-display-row"><div class="stars-display" id="disp-3"></div><span class="rating-avg" id="avg-3">—</span><span class="rating-cnt" id="cnt-3">(No ratings yet)</span></div>
+            <div class="user-rating-lbl">Rate this driver:</div>
+            <div class="stars-user" id="user-3"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DRIVER 4 -->
+      <!--<div class="driver-card fade-in">
+        <div class="drv-img-wrap">
+          <img src="images/driver4.jpg" alt="Driver 4" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="drv-ph" style="display:none"><div class="drv-ph-circle">👨‍✈️</div><div class="drv-ph-label">📷 driver4.jpg</div></div>
+          <div class="drv-verified">✓ Verified</div>
+        </div>
+        <div class="drv-body">
+          <div class="drv-name">Driver 4 — Add Name</div>
+          <div class="drv-role">🚗 Professional Driver</div>
+          <p class="drv-desc" style="color:rgba(201,168,76,.55);font-style:italic">📝 Replace with Driver 4's real name and a short bio — years of experience, routes they specialize in, and a personal note.</p>
+          <div class="drv-tags"><span class="drv-tag">Add years</span><span class="drv-tag">Add specialty</span><span class="drv-tag">Add language</span></div>
+          <div class="star-rating-wrap" data-driver="4" data-avg="0" data-count="0">
+            <div class="stars-display-row"><div class="stars-display" id="disp-4"></div><span class="rating-avg" id="avg-4">—</span><span class="rating-cnt" id="cnt-4">(No ratings yet)</span></div>
+            <div class="user-rating-lbl">Rate this driver:</div>
+            <div class="stars-user" id="user-4"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DRIVER 5 -->
+      <!--<div class="driver-card fade-in">
+        <div class="drv-img-wrap">
+          <img src="images/driver5.jpg" alt="Driver 5" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="drv-ph" style="display:none"><div class="drv-ph-circle">👨‍✈️</div><div class="drv-ph-label">📷 driver5.jpg</div></div>
+          <div class="drv-verified">✓ Verified</div>
+        </div>
+        <div class="drv-body">
+          <div class="drv-name">Driver 5 — Add Name</div>
+          <div class="drv-role">🚗 Professional Driver</div>
+          <p class="drv-desc" style="color:rgba(201,168,76,.55);font-style:italic">📝 Replace with Driver 5's real name and a short bio — years of experience, routes they specialize in, and a personal note.</p>
+          <div class="drv-tags"><span class="drv-tag">Add years</span><span class="drv-tag">Add specialty</span><span class="drv-tag">Add language</span></div>
+          <div class="star-rating-wrap" data-driver="5" data-avg="0" data-count="0">
+            <div class="stars-display-row"><div class="stars-display" id="disp-5"></div><span class="rating-avg" id="avg-5">—</span><span class="rating-cnt" id="cnt-5">(No ratings yet)</span></div>
+            <div class="user-rating-lbl">Rate this driver:</div>
+            <div class="stars-user" id="user-5"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DRIVER 6 -->
+      <!--<div class="driver-card fade-in">
+        <div class="drv-img-wrap">
+          <img src="images/driver6.jpg" alt="Driver 6" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="drv-ph" style="display:none"><div class="drv-ph-circle">👨‍✈️</div><div class="drv-ph-label">📷 driver6.jpg</div></div>
+          <div class="drv-verified">✓ Verified</div>
+        </div>
+        <div class="drv-body">
+          <div class="drv-name">Driver 6 — Add Name</div>
+          <div class="drv-role">🚗 Professional Driver</div>
+          <p class="drv-desc" style="color:rgba(201,168,76,.55);font-style:italic">📝 Replace with Driver 6's real name and a short bio — years of experience, routes they specialize in, and a personal note.</p>
+          <div class="drv-tags"><span class="drv-tag">Add years</span><span class="drv-tag">Add specialty</span><span class="drv-tag">Add language</span></div>
+          <div class="star-rating-wrap" data-driver="6" data-avg="0" data-count="0">
+            <div class="stars-display-row"><div class="stars-display" id="disp-6"></div><span class="rating-avg" id="avg-6">—</span><span class="rating-cnt" id="cnt-6">(No ratings yet)</span></div>
+            <div class="user-rating-lbl">Rate this driver:</div>
+            <div class="stars-user" id="user-6"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>-->
+
+<!-- ══ ABOUT ══ -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="fade-in" style="position:relative">
+        <div class="about-img-box">🚕<div class="about-float"><strong>15+</strong><span>Years of Service</span></div></div>
+      </div>
+      <div class="fade-in">
+        <div class="section-label">About Us</div>
+        <h2 class="section-title">Your Trusted Transport Partner in Mombasa</h2>
+        <p class="about-story">EMMANUEL Tours &amp; Taxi For All was born from a simple belief: every person deserves safe, comfortable and reliable transport — whether you're a solo traveler, a family heading to the coast, a business team or a visitor exploring Kenya's beautiful coastal region.</p>
+        <p class="about-story">Based in Mombasa, we serve clients across the entire coastal region and beyond. With a team of experienced, verified drivers and a fleet of well-maintained vehicles, we've built our reputation on punctuality, safety and genuine care for every passenger.</p>
+        <div class="values-grid">
+          <div class="value-item"><h5>🛡️ Safety First</h5><p>All vehicles inspected regularly. Drivers fully vetted and trained.</p></div>
+          <div class="value-item"><h5>⏱️ Always On Time</h5><p>We value your time as much as you do.</p></div>
+          <div class="value-item"><h5>💬 Open Communication</h5><p>Available 24/7 by call, SMS or WhatsApp.</p></div>
+          <div class="value-item"><h5>🌍 Local Expertise</h5><p>Deep knowledge of Mombasa &amp; coastal Kenya roads.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-header fade-in" style="text-align:center;max-width:600px;margin:0 auto 56px">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">We're Always Here For You</h2>
+      <p class="section-sub" style="max-width:100%">Reach us by WhatsApp, phone or email. We respond fast — usually within minutes.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="fade-in">
+        <div class="contact-cards">
+          <a href="https://wa.me/254720000104" class="cc-item" target="_blank"><div class="cc-icon green">💬</div><div class="cc-text"><strong>+254 720 000 104</strong><span>WhatsApp — Primary (Fastest response)</span></div></a>
+          <a href="tel:+254717280247" class="cc-item"><div class="cc-icon blue">📞</div><div class="cc-text"><strong>+254 717 280 247</strong><span>Secondary Line</span></div></a>
+          <a href="mailto:emmanueltours@gmail.com" class="cc-item"><div class="cc-icon gold">✉️</div><div class="cc-text"><strong>emmanueltours@gmail.com</strong><span>Email anytime</span></div></a>
+          <div class="cc-item" style="cursor:default"><div class="cc-icon" style="background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2)">📍</div><div class="cc-text"><strong>Mombasa, Kenya</strong><span>Serving Mombasa &amp; entire coastal region</span></div></div>
+        </div>
+        <div class="social-pay-box">
+          <h5>Follow Us</h5>
+          <div class="social-icons"><a class="social-btn" href="#" title="Facebook">📘</a><a class="social-btn" href="#" title="Instagram">📸</a><a class="social-btn" href="https://wa.me/254720000104" title="WhatsApp" target="_blank">💬</a></div>
+          <h5 style="margin-top:16px">We Accept</h5>
+          <div class="pay-logos"><div class="pay-logo mpesa">M-PESA</div><div class="pay-logo visa">VISA</div><div class="pay-logo mc">Mastercard</div></div>
+        </div>
+      </div>
+      <div class="contact-form-card fade-in">
+        <div class="section-label">Send a Message</div>
+        <h3 style="font-size:22px;margin-bottom:24px">Quick Enquiry</h3>
+        <div class="contact-form">
+          <div class="form-group"><label>Your Name</label><input type="text" class="form-control" id="cName" placeholder="Your full name"></div>
+          <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" class="form-control" id="cPhone" placeholder="e.g. 0720000104"></div>
+          <div class="form-group"><label>Subject</label><select class="form-control" id="cSubject"><option value="">Select subject</option><option>Booking Enquiry</option><option>Price Quote</option><option>Corporate Travel</option><option>Airport Transfer</option><option>Other</option></select></div>
+          <div class="form-group"><label>Message</label><textarea class="message-area" id="cMessage" placeholder="Type your message here..."></textarea></div>
+          <button class="btn-primary" onclick="sendContact()" style="width:100%;justify-content:center;padding:15px">Send via WhatsApp 💬</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-wrap"><div class="logo-icon">ET</div><div class="logo-text"><strong>EMMANUEL</strong><span>Tours &amp; Taxi For All</span></div></div>
+      <p>Reliable, comfortable and on-time transport services across Mombasa and the entire coastal region of Kenya.</p>
+      <div style="font-size:12px;color:var(--gold);font-style:italic">"Reliable. Comfortable. On Time. Every Time."</div>
+    </div>
+    <div class="footer-col"><h5>Navigation</h5><a href="#home">Home</a><a href="#fleet">Our Fleet</a><!--<a href="#destinations">Destinations</a>--><a href="#book">Book a Ride</a><!--<a href="#drivers">Our Drivers</a>--><a href="#about">About Us</a><a href="#contact">Contact</a></div>
+    <div class="footer-col"><h5>Services</h5><a href="#destinations">Airport Transfers</a><a href="#destinations">City Rides</a><a href="#destinations">Long Distance</a><a href="#destinations">Corporate Hire</a><a href="#destinations">Group Travel</a></div>
+    <div class="footer-col"><h5>Contact</h5><a href="https://wa.me/254720000104" target="_blank">💬 WhatsApp Us</a><a href="tel:+254720000104">📞 +254 720 000 104</a><a href="tel:+254717280247">📞 +254 717 280 247</a><a href="mailto:emmanueltours@gmail.com">✉️ emmanueltours@gmail.com</a><a>📍 Mombasa, Kenya</a></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 EMMANUEL Tours &amp; Taxi For All. All Rights Reserved.</p><p style="color:rgba(255,255,255,.2)">Mombasa, Kenya</p></div>
+</footer>
+
+<a href="https://wa.me/254720000104" class="wa-float" target="_blank">💬</a>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <div class="modal-icon" id="mIcon">🎉</div>
+    <h3 id="mTitle">Booking Submitted!</h3>
+    <p id="mMsg">Your booking has been received. We'll call you shortly to confirm.</p>
+    <button class="modal-close" onclick="document.getElementById('modal').classList.remove('open')">Close</button>
+  </div>
+</div>
+<div id="toast"></div>
+
+<script>
+/* ── CONFIG ── */
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbybG6cWiCe8-MBTdbS_IqsRfwg2iysihMLwAf-VhYWDbwnrjXBW6RaGZdoCZskBeZ4o/exec";
+const FARES = { vitz: 2500, sienta: 3800 };
+
+/* ── TOAST ── */
+function toast(msg, type='info') {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'show ' + type;
+  clearTimeout(t._t); t._t = setTimeout(() => t.className='', 4500);
+}
+
+/* ── MODAL ── */
+function modal(icon, title, msg) {
+  document.getElementById('mIcon').textContent = icon;
+  document.getElementById('mTitle').textContent = title;
+  document.getElementById('mMsg').textContent = msg;
+  document.getElementById('modal').classList.add('open');
+}
+
+/* ── NAV ── */
+let navOpen = false;
+function toggleNav() {
+  navOpen = !navOpen;
+  document.getElementById('navMenu').classList.toggle('open', navOpen);
+  const ss = document.getElementById('hamburger').querySelectorAll('span');
+  if (navOpen) { ss[0].style.transform='rotate(45deg) translate(5px,5px)'; ss[1].style.opacity='0'; ss[2].style.transform='rotate(-45deg) translate(5px,-5px)'; }
+  else ss.forEach(s => { s.style.transform=''; s.style.opacity=''; });
+}
+function closeNav() { if (navOpen) toggleNav(); }
+
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', scrollY > 50);
+  ['home','fleet','destinations','book','drivers','about','contact'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    if (r.top <= 120 && r.bottom >= 120) {
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      document.querySelectorAll(`nav a[href="#${id}"]`).forEach(a => a.classList.add('active'));
+    }
+  });
+});
+
+/* ── FADE IN ── */
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e,i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i*70); obs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+/* ── PAYMENT TABS ── */
+function switchTab(method, el) {
+  document.querySelectorAll('.pay-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.pay-panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('panel-'+method).classList.add('active');
+  document.getElementById('payment').value = method;
+}
+
+/* ── FARE ESTIMATE ── */
+function updateFare() {
+  const car = document.getElementById('car').value;
+  const d = document.getElementById('fareDisplay');
+  if (FARES[car]) { d.style.color='var(--gold-light)'; d.textContent = 'From KES ' + FARES[car].toLocaleString() + ' / trip'; }
+  else { d.style.color='var(--muted)'; d.textContent='Select car to see estimate'; }
+}
+
+/* ── QUICK CHECK ── */
+function quickCheck() {
+  const p=document.getElementById('qPickup').value, d=document.getElementById('qDestination').value,
+        dt=document.getElementById('qDate').value, c=document.getElementById('qCar').value;
+  if (!p||!d||!dt||!c) { toast('⚠️ Please fill all quick booking fields','error'); return; }
+  document.getElementById('pickup').value=p;
+  document.getElementById('destination').value=d;
+  document.getElementById('date').value=dt;
+  document.getElementById('car').value=c; updateFare();
+  document.getElementById('book').scrollIntoView({behavior:'smooth'});
+  toast('✅ Details pre-filled — complete your booking below!','success');
+}
+
+/* ── BOOK RIDE ── */
+function bookRide() {
+  const name=document.getElementById('name').value.trim(), phone=document.getElementById('phone').value.trim(),
+        pickup=document.getElementById('pickup').value.trim(), dest=document.getElementById('destination').value.trim(),
+        date=document.getElementById('date').value, time=document.getElementById('time').value,
+        car=document.getElementById('car').value, pax=document.getElementById('passengers').value,
+        payment=document.getElementById('payment').value, notes=document.getElementById('notes').value.trim();
+  if (!name||!phone||!pickup||!dest||!date||!car) { toast('⚠️ Please fill in all required fields','error'); return; }
+  const btn=document.getElementById('submitBtn');
+  btn.innerHTML='<span class="spinner"></span> Submitting...'; btn.classList.add('btn-loading');
+  fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,phone,pickup,destination:dest,date,time,car,passengers:pax,payment,notes})})
+  .then(()=>{
+    btn.innerHTML='📅 Confirm Booking'; btn.classList.remove('btn-loading');
+    if (payment==='mpesa') modal('📱','M-Pesa Request Sent!',`An STK Push has been sent to ${phone}. Enter your M-Pesa PIN to complete payment. We'll call to confirm shortly.`);
+    else if (payment==='card') modal('💳','Redirecting to Payment...','You will be redirected to our secure Pesapal payment page. Your booking has been recorded.');
+    else {
+      const msg=encodeURIComponent(`Hello Emmanuel!\nName: ${name}\nFrom: ${pickup}\nTo: ${dest}\nDate: ${date} at ${time}\nCar: ${car}\nPassengers: ${pax}\n${notes?'Note: '+notes:''}`);
+      setTimeout(()=>window.open(`https://wa.me/254720000104?text=${msg}`,'_blank'),600);
+      modal('📋','Reservation Noted!','Your details have been sent to WhatsApp for confirmation. We\'ll contact you shortly.');
+    }
+    ['name','phone','pickup','destination','date','time','notes'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+    document.getElementById('car').value=''; document.getElementById('passengers').value='';
+    document.getElementById('fareDisplay').textContent='Select car to see estimate';
+    document.getElementById('fareDisplay').style.color='var(--muted)';
+  })
+  .catch(()=>{ btn.innerHTML='📅 Confirm Booking'; btn.classList.remove('btn-loading'); toast('❌ Submission failed. Please WhatsApp us directly.','error'); });
+}
+
+/* ── CONTACT FORM ── */
+function sendContact() {
+  const n=document.getElementById('cName').value.trim(), p=document.getElementById('cPhone').value.trim(),
+        s=document.getElementById('cSubject').value, m=document.getElementById('cMessage').value.trim();
+  if (!n||!p||!m) { toast('⚠️ Please fill in name, phone and message','error'); return; }
+  window.open(`https://wa.me/254720000104?text=${encodeURIComponent(`Hello Emmanuel!\nName: ${n}\nPhone: ${p}\nSubject: ${s}\nMessage: ${m}`)}`, '_blank');
+  toast('✅ Opening WhatsApp with your message!','success');
+  ['cName','cPhone','cMessage'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('cSubject').value='';
+}
+
+/* ── STAR RATINGS ── */
+function buildStars(n) {
+  const wrap = document.querySelector(`[data-driver="${n}"]`);
+  if (!wrap) return;
+  const avg = parseFloat(wrap.dataset.avg)||0;
+  // Display stars
+  const disp = document.getElementById(`disp-${n}`);
+  disp.innerHTML='';
+  for (let i=1;i<=5;i++) {
+    const s=document.createElement('span');
+    s.className='star display-star'+(i<=Math.round(avg)?' lit':'');
+    s.textContent='★'; disp.appendChild(s);
+  }
+  // User interactive stars
+  const user = document.getElementById(`user-${n}`);
+  user.innerHTML='';
+  const saved = localStorage.getItem(`drv-rate-${n}`);
+  for (let i=1;i<=5;i++) {
+    const s=document.createElement('span');
+    s.className='star'+(saved&&i<=parseInt(saved)?' lit':'');
+    s.textContent='★'; s.dataset.v=i;
+    s.addEventListener('mouseover',()=>user.querySelectorAll('.star').forEach((st,j)=>st.classList.toggle('lit',j<i)));
+    s.addEventListener('mouseleave',()=>{const c=localStorage.getItem(`drv-rate-${n}`);user.querySelectorAll('.star').forEach((st,j)=>st.classList.toggle('lit',c&&j<parseInt(c)));});
+    s.addEventListener('click',()=>rateDriver(n,i));
+    user.appendChild(s);
+  }
+}
+
+function rateDriver(n, r) {
+  localStorage.setItem(`drv-rate-${n}`, r);
+  toast(`⭐ Thanks! You rated Driver ${n} — ${r}/5 stars!`,'success');
+  document.getElementById(`user-${n}`).querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('lit',i<r));
+  fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'rating',driver:n,rating:r})}).catch(()=>{});
+}
+
+/* ── INIT ── */
+document.addEventListener('DOMContentLoaded', () => {
+  const today = new Date().toISOString().split('T')[0];
+  ['date','qDate'].forEach(id=>{const e=document.getElementById(id);if(e)e.min=today;});
+  for (let i=1;i<=6;i++) buildStars(i);
+});
+</script>
+</body>
+</html>
